@@ -1,0 +1,298 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1692092900" author="Ayush Jain">
+        <preConditions onFail="MARK_RAN">
+            <or>
+                <not>
+                    <tableExists tableName="ayushmaanbhav_payment_order"/>
+                </not>
+                <not>
+                    <tableExists tableName="ayushmaanbhav_payment_order_line_item"/>
+                </not>
+                <not>
+                    <tableExists tableName="ayushmaanbhav_gateway_provider_event"/>
+                </not>
+            </or>
+        </preConditions>
+
+        <createTable tableName="ayushmaanbhav_payment_order">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="store_id" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="source" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source_service" type="varchar(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ayushmaanbhav_payment_order_line_item">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="normalised_amount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ledger_debit_account_id" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ledger_credit_account_id" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gateway_provider_config_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gateway_provider_payment_detail_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="paid_date" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="expired_date" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="payment_order_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ayushmaanbhav_gateway_provider_event">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_id" type="varchar(32)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="api_client_class" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_transaction_id" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_status" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_session_id" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_order_id" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="error_code" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="error_description" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="event_type" type="varchar(32)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="event" type="varchar(64)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="http_method" type="varchar(8)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="http_status_code" type="varchar(3)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="headers" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="query_params" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="request" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="response" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="content_type" type="varchar(32)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ayushmaanbhav_gateway_provider_payment_detail">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_id" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="provider_order_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="provider_status" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_web_url" type="varchar(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_deep_link" type="varchar(2048)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="provider_transaction_id" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_session_id" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_payment_method" type="varchar(16)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_paid_date" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_error_code" type="varchar(8)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="provider_error_description" type="varchar(64)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <createIndex tableName="ayushmaanbhav_gateway_provider_payment_detail" indexName="idx_order_id">
+            <column name="order_id"/>
+        </createIndex>
+        <createIndex tableName="ayushmaanbhav_gateway_provider_payment_detail" indexName="idx_provider_order_id">
+            <column name="provider_order_id"/>
+        </createIndex>
+
+        <createTable tableName="ayushmaanbhav_gateway_provider_config">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="provider" type="varchar(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="merchant_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="connection_setting_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="disabled" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="disabled_reason" type="varchar(16)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="disabled_date" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ayushmaanbhav_gateway_connection_setting">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="provider" type="varchar(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="connection_setting" type="varchar(4096)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token_refresh_enabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retry_count" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_token_refresh_date" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

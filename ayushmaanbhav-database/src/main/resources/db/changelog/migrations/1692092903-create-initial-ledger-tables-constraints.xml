@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1692092901" author="Ayush Jain">
+        <preConditions onFail="MARK_RAN">
+            <or>
+                <not>
+                    <foreignKeyConstraintExists foreignKeyTableName="ayushmaanbhav_ledger_transaction_line_item"
+                                                foreignKeyName="fk_line_item_account_id"/>
+                </not>
+                <not>
+                    <foreignKeyConstraintExists foreignKeyTableName="ayushmaanbhav_ledger_transaction_line_item"
+                                                foreignKeyName="fk_line_item_transaction_id"/>
+                </not>
+            </or>
+        </preConditions>
+
+        <addForeignKeyConstraint constraintName="fk_line_item_account_id"
+                                 baseTableName="ayushmaanbhav_ledger_transaction_line_item" baseColumnNames="account_id"
+                                 referencedTableName="ayushmaanbhav_ledger_account" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_line_item_transaction_id"
+                                 baseTableName="ayushmaanbhav_ledger_transaction_line_item" baseColumnNames="transaction_id"
+                                 referencedTableName="ayushmaanbhav_ledger_transaction" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

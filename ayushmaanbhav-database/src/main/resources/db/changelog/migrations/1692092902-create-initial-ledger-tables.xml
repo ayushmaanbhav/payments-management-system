@@ -1,0 +1,103 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1692092902" author="Ayush Jain">
+        <preConditions onFail="MARK_RAN">
+            <or>
+                <not>
+                    <tableExists tableName="ayushmaanbhav_account"/>
+                </not>
+                <not>
+                    <tableExists tableName="ayushmaanbhav_transaction"/>
+                </not>
+                <not>
+                    <tableExists tableName="ayushmaanbhav_transaction_line_item"/>
+                </not>
+            </or>
+        </preConditions>
+
+        <createTable tableName="ayushmaanbhav_ledger_account">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="external_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ayushmaanbhav_ledger_transaction">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_ref_id" type="varchar(32)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="transaction_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ayushmaanbhav_ledger_transaction_line_item">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_on" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="normalised_amount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operation_type" type="varchar(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transfer_entity_type" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

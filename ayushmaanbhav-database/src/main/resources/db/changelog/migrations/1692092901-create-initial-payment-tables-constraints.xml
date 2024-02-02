@@ -1,0 +1,31 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1692092901" author="Ayush Jain">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyTableName="ayushmaanbhav_payment_order_line_item"
+                                            foreignKeyName="fk_line_item_payment_order_id"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint constraintName="fk_line_item_payment_order_id"
+                                 baseTableName="ayushmaanbhav_payment_order_line_item" baseColumnNames="payment_order_id"
+                                 referencedTableName="ayushmaanbhav_payment_order" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_gateway_provider_config_id"
+                                 baseTableName="ayushmaanbhav_payment_order_line_item" baseColumnNames="gateway_provider_config_id"
+                                 referencedTableName="ayushmaanbhav_gateway_provider_config" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_gateway_connection_setting_id"
+                                 baseTableName="ayushmaanbhav_gateway_provider_config" baseColumnNames="connection_setting_id"
+                                 referencedTableName="ayushmaanbhav_gateway_connection_setting" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_gateway_provider_payment_detail_id"
+                                 baseTableName="ayushmaanbhav_payment_order_line_item" baseColumnNames="gateway_provider_payment_detail_id"
+                                 referencedTableName="ayushmaanbhav_gateway_provider_payment_detail" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

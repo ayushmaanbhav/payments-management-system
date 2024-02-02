@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ayushmaanbhav</groupId>
+    <artifactId>ayushmaanbhav-backend</artifactId>
+    <packaging>pom</packaging>
+    <version>1.1.4-SNAPSHOT</version>
+    <modules>
+        <module>ayushmaanbhav-server</module>
+        <module>ayushmaanbhav-commons</module>
+        <module>ayushmaanbhav-database</module>
+        <module>ayushmaanbhav-security</module>
+        <module>ayushmaanbhav-commons-spring</module>
+        <module>ayushmaanbhav-communication</module>
+        <module>ayushmaanbhav-client</module>
+        <module>ayushmaanbhav-search</module>
+        <module>ayushmaanbhav-payment</module>
+        <module>ayushmaanbhav-payment-common</module>
+        <module>ayushmaanbhav-ledger-commons</module>
+        <module>ayushmaanbhav-ledger</module>
+        <module>ayushmaanbhav-analytics</module>
+        <module>ayushmaanbhav-request-idempotency</module>
+        <module>ayushmaanbhav-gateway-provider</module>
+        <module>ayushmaanbhav-gateway-provider-common</module>
+        <module>ayushmaanbhav-gateway-provider-setu</module>
+        <module>ayushmaanbhav-event-processor</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.15</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <SPRING_PROFILE>local</SPRING_PROFILE>
+            </properties>
+        </profile>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <SPRING_PROFILE>default</SPRING_PROFILE>
+            </properties>
+        </profile>
+    </profiles>
+
+    <properties>
+        <java.version>11</java.version>
+        <springboot.version>2.7.15</springboot.version>
+        <lombok.version>1.18.22</lombok.version>
+        <azure.storage.version>12.9.0</azure.storage.version>
+        <mysql.connector.version>8.0.28</mysql.connector.version>
+        <r4j.version>2.1.0</r4j.version>
+    </properties>
+
+    <!--<repositories>
+        <repository>
+            <id>ayushmaanbhav-artifacts</id>
+            <url>https://pkgs.dev.azure.com/ayushmaanbhav-in/ayushmaanbhav/_packaging/ayushmaanbhav-artifacts/maven/v1</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>ayushmaanbhav-artifacts</id>
+            <url>https://pkgs.dev.azure.com/ayushmaanbhav-in/ayushmaanbhav/_packaging/ayushmaanbhav-artifacts/maven/v1</url>
+        </repository>
+        <snapshotRepository>
+            <id>ayushmaanbhav-snapshot-artifacts</id>
+            <url>https://pkgs.dev.azure.com/ayushmaanbhav-in/ayushmaanbhav/_packaging/ayushmaanbhav-snapshot-artifacts/maven/v1</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <url>https://ayushmaanbhav-in@dev.azure.com/ayushmaanbhav-in/ayushmaanbhav/_git/ayushmaanbhav-backend/src</url>
+        <connection>scm:git:https://ayushmaanbhav-in@dev.azure.com/ayushmaanbhav-in/ayushmaanbhav/_git/ayushmaanbhav-backend</connection>
+        <developerConnection>scm:git:https://ayushmaanbhav-in@dev.azure.com/ayushmaanbhav-in/ayushmaanbhav/_git/ayushmaanbhav-backend</developerConnection>
+        <tag>Rel-1.0.0</tag>
+    </scm>-->
+    
+</project>
